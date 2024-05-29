@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}<title>Main page</title>{% endblock %}
+
+{% block navbar %}
+<nav>
+    <ul>
+        <li><a href="{{ url_for('main.index') }}">Home</a></li>
+        <li><a href="#">Tickets</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="#">Logout</a></li>
+        {% else %}
+        <li><a href="#">Login</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endblock%}
+
+{% block content %}
+<h1>Wellcome, {{ user.username if user else "Guest"}}</h1>
+{% endblock %}
