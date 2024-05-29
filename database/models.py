@@ -27,6 +27,7 @@ class Group(db.Model):
 
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    note = db.Column(db.Text, nullable=False)
     status = db.Column(
         db.Enum("Pending", "Closed", "In review"), default="Pending", nullable=False
         )
