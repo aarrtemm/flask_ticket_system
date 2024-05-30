@@ -17,6 +17,15 @@ class User(db.Model, UserMixin):
         )
     group_id = db.Column(db.Integer, db.ForeignKey("group.id"))
 
+    def is_admin(self):
+        return self.role == "Admin"
+    
+    def is_manager(self):
+        return self.role == "Manager"
+    
+    def is_analyst(self):
+        return self.role == "Analyst"
+
 
 
 class Group(db.Model):
