@@ -6,6 +6,8 @@ from database.models import db, migrate, User, Group
 from werkzeug.security import generate_password_hash, check_password_hash
 import routes
 
+from config import ADMIN_PASSWORD
+
 
 
 app = Flask(__name__)
@@ -27,7 +29,7 @@ def create_tables():
     if not User.query.first():
         user = User(
             username="admin",
-            password=generate_password_hash("admin", method="pbkdf2:sha256"),
+            password=generate_password_hash(ADMIN_PASSWORD, method="pbkdf2:sha256"),
             role="Admin"
             )
         customer1 = Group(name="Customer 1")
