@@ -6,16 +6,17 @@
 <nav>
     <ul>
         <li><a href="{{ url_for('main.index') }}">Home</a></li>
-        <li><a href="#">Tickets</a></li>
-        {% if user.is_authenticated %}
-        <li><a href="#">Logout</a></li>
+        <li><a href="{{ url_for('main.tickets') }}">Tickets</a></li>
+        {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for("main.logout") }}">Logout</a></li>
         {% else %}
-        <li><a href="#">Login</a></li>
+        <li><a href="{{ url_for("main.register") }}">Register</a></li>
+        <li><a href="{{ url_for("main.login") }}">Login</a></li>
         {% endif %}
     </ul>
 </nav>
 {% endblock%}
 
 {% block content %}
-<h1>Wellcome, {{ user.username if user else "Guest"}}</h1>
+<h1>Wellcome, {{ current_user.username if current_user.username else "Guest"}}</h1>
 {% endblock %}

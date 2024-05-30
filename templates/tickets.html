@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}<title>Tickets</title>{% endblock %}
+
+{% block content %}
+<h1>Tickets</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.note.label }}<br>
+        {{ form.note(rows=5) }}
+    </p>
+    <p>
+        {{ form.status.label }}<br>
+        {{ form.status() }}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+<h2>Existing Tickets</h2>
+<ul>
+    {% for ticket in tickets %}
+    <li>
+        <strong>Status:</strong> {{ ticket.status }}<br>
+        <strong>Note:</strong> {{ ticket.note }}<br>
+        <strong>Group ID:</strong> {{ ticket.group_id }}<br>
+        <strong>User ID:</strong> {{ ticket.user_id }}
+    </li>
+    <br>
+    {% endfor %}
+</ul>
+{% endblock %}
