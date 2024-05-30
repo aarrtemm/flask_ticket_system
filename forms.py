@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, TextAreaField, SelectField, ValidationError
 from wtforms.validators import DataRequired, EqualTo, Length
 
+
 from database.models import User
 
 
@@ -30,4 +31,4 @@ class TicketForm(FlaskForm):
         default="Pending",
         validators=[DataRequired()]
         )
-    sumit = SubmitField("Create ticket")
+    submit = SubmitField("Create ticket")
