@@ -3,19 +3,6 @@
 {% block title %}<title>Tickets</title>{% endblock %}
 
 {% block content %}
-<h1>Tickets</h1>
-<form method="POST">
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.note.label }}<br>
-        {{ form.note(rows=5) }}
-    </p>
-    <p>
-        {{ form.status.label }}<br>
-        {{ form.status() }}
-    </p>
-    <p>{{ form.submit() }}</p>
-</form>
 <h2>Existing Tickets</h2>
 <ul>
     {% for ticket in tickets %}
@@ -26,6 +13,24 @@
         <strong>User ID:</strong> {{ ticket.user_id }}
     </li>
     <br>
+    {% if ticket%}
+        {% if current_user.is_admin() or current_user.is_manager() %}
+            <a class="btn btn-primary" href="{{ url_for('main.update_ticket', ticket_id=ticket.id) }}">Update Ticket</a>
+
+            {% if current_user.is_admin() %}
+            <form action="{{ url_for('main.delete_ticket', ticket_id=ticket.id) }}" method="POST">
+                {{ form.hidden_tag() }}
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            {% endif %}
+        {% endif %}
+    {% endif %}
     {% endfor %}
 </ul>
+
+{% if current_user.is_authenticated %}
+    {% if current_user.is_admin() or current_user.is_manager() %}
+        <a href="{{ url_for('main.create_ticket') }}">Create Ticket</a>
+    {% endif %}
+{% endif%}
 {% endblock %}
