@@ -32,3 +32,7 @@ class TicketForm(FlaskForm):
         validators=[DataRequired()]
         )
     submit = SubmitField("Create ticket")
+
+
+class DeleteTicketForm(FlaskForm):
+    submit = SubmitField("Delete")
